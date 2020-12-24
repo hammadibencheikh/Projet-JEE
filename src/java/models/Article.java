@@ -12,24 +12,24 @@ import java.util.Date;
  * @author 21627
  */
 public class Article {
-    private int id_a;
+    private int ida;
     private String titre,bio,img;
     private Date datepub;
 
-    public Article(int id_a, String titre, String bio, String img, Date datepub) {
-        this.id_a = id_a;
+    public Article(int ida, String titre, String bio, String img, Date datepub) {
+        this.ida = ida;
         this.titre = titre;
         this.bio = bio;
         this.img = img;
         this.datepub = datepub;
     }
 
-    public int getId_a() {
-        return id_a;
+    public int getIda() {
+        return ida;
     }
 
-    public void setId_a(int id_a) {
-        this.id_a = id_a;
+    public void setId_a(int ida) {
+        this.ida = ida;
     }
 
     public String getTitre() {

@@ -3,7 +3,15 @@
     Created on : 24 déc. 2020, 13:27:37
     Author     : 21627
 --%>
-
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.List"%>
+<%@page import="models.Article"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.DAOUtil"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -68,12 +76,28 @@
                             </a>
                         </div>
                     </div>
+                    
+                    
+                    
+                         
+                    
+                             
                     <div class="col-lg-3 col-md-4">
                         <div class="b-search">
-                            <input type="text" placeholder="Search">
+                            <form action="recherche.jsp">
+                            <input type="text" placeholder="Search" name="mot">
+                               </form>
                             <button><i class="fa fa-search"></i></button>
                         </div>
                     </div>
+                          
+                
+                
+                
+                
+                
+                
+                
                 </div>
             </div>
         </div>
@@ -94,8 +118,10 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Category</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Sub Item 1</a>
-                                    <a href="#" class="dropdown-item">Sub Item 2</a>
+                                   
+                                    <a href="recherche.jsp?idcat=" class="dropdown-item"></a>
+                                    
+                                    
                                 </div>
                             </div>
                             <a href="single-page.html" class="nav-item nav-link">Single Page</a>
@@ -109,3 +135,5 @@
             </div>
         </div>
         <!-- Nav Bar End -->
+    </body>
+    
