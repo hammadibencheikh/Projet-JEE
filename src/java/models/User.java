@@ -23,7 +23,7 @@ public class User {
         this.password = password;
     }
 
-    public User(int aInt, String string, String string0) {
+    public User(int id_u, String name, String firstname) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

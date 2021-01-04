@@ -6,29 +6,26 @@
 package controlers;
 
 import dao.DAOUtil;
-import models.User;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static org.apache.tomcat.jni.User.username;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author 21627
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Editarticle", urlPatterns = {"/Editarticle"})
+public class Editarticle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +44,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet Editarticle</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Editarticle at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,33 +79,36 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String username=request.getParameter("username");
-            String password=request.getParameter("password");         
-            Connection conn=DAOUtil.getConnection();
-            PreparedStatement ps=conn.prepareStatement("Select * from user where username=? and password=?");
-            ps.setString(1,username);
-            ps.setString(2,password);
-            ResultSet rs=ps.executeQuery();
-            if(rs.next()) {
-              User u = new User(rs.getInt("id_u"),rs.getString("name"),rs.getString("firstname")) ;
-              request.getSession().setAttribute("u",u);
-              request.getRequestDispatcher("dashboard.jsp").forward(request,response) ;
-              
-           
-        } else {
-                    request.setAttribute("msg", "username ou password invalide");
-               
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
-                     
-            
-            }
-        } catch (Exception ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+       
+    
+  try {
+                   String titre=request.getParameter("titre");         
+                   String bio=request.getParameter("bio");  
+                   String img=request.getParameter("img"); 
+                   int  ida=Integer.parseInt(request.getParameter("ida")); 
+            Connection con=DAOUtil.getConnection();
+            PreparedStatement ps=con.prepareStatement("UPDATE article set titre=? , bio=? , img=? where ida=? ");
+     
+
+         /* Part p=request.getPart("img");
+            String filename= p.getHeader("content-disposition");
+                    for(String s:filename.split(";")){
+                        if(s.trim().startsWith("filename")){
+                            filename=s.substring(s.indexOf("=")+1).trim().replace("\"","");
+                            filename=filename.substring(filename.lastIndexOf('/')+1).substring(filename.lastIndexOf('\\')+1);
+                        }
+                    }
+                    p.write(getServletContext().getRealPath("/img/"+filename));*/
+                         ps.setString(1, titre);
+            ps.setString(2, bio);
+            ps.setString(3, img);
+            ps.setInt(4, ida);
+            ps.executeUpdate();
+            request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+ } catch (Exception ex) {
+            Logger.getLogger(Addarticle.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
     /**
      * Returns a short description of the servlet.
      *

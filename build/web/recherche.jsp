@@ -37,7 +37,6 @@
                             while(rs.next())
                                 arts.add(new Article(rs.getInt("ida"), rs.getString("titre"),rs.getString("bio"),rs.getString("img"),sdf.parse(rs.getDate("datepub").toString())));
                                                 conn.close();
-
                              %>
                              
                               

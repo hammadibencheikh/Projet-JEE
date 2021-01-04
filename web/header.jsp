@@ -3,6 +3,7 @@
     Created on : 24 déc. 2020, 13:27:37
     Author     : 21627
 --%>
+<%@page import="models.User"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.ResultSet"%>
@@ -127,9 +128,19 @@
                             <a href="single-page.html" class="nav-item nav-link">Single Page</a>
                             <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                         </div>
+                        <% if(session.getAttribute("u")==null){  %>
                         <div class="navbar-nav" ml-auto">
                      <a href="login.jsp" class="nav-item nav-link">Login</a>
                         </div>
+                        <%} else { 
+                        User u=(User)session.getAttribute("u");
+                        %>
+                        <div class="navbar-nav" ml-auto">
+                     <a href="login.jsp" class="nav-item nav-link"><%=u.getUsername()%></a>
+                     <a href="logout.jsp" class="nav-item nav-link">Se deconnecter</a>
+
+                        </div>
+                        <%}%>
                     </div>
                 </nav>
             </div>
